@@ -1,0 +1,228 @@
+# Content API Contract: Physical AI & Humanoid Robotics Textbook
+
+**Feature**: 001-physical-ai-humanoid-robotics
+**Date**: 2025-12-06
+**Version**: 1.0.0
+**Status**: Design
+
+## Overview
+
+This contract defines the structure and access patterns for the Physical AI & Humanoid Robotics textbook content. The textbook is a static documentation site built with Docusaurus, with content organized in modules and subchapters.
+
+## Content Structure API
+
+### Module Entity
+
+```yaml
+Module:
+  id: string
+    description: "Unique identifier for the module (e.g., 'module1', 'capstone')"
+    pattern: "^(module[1-4]|capstone)$"
+  title: string
+    description: "Display title of the module"
+    minLength: 5
+    maxLength: 100
+  description: string
+    description: "Brief description of the module's content"
+    maxLength: 500
+  subchapters: array[Subchapter]
+    description: "List of subchapters in this module"
+    minItems: 1
+    maxItems: 10
+  word_count: integer
+    description: "Target word count for the module"
+    minimum: 1000
+    maximum: 1500
+  content_types: array[string]
+    description: "Content types used in this module"
+    items:
+      enum: [text, code, image, diagram, table]
+```
+
+### Subchapter Entity
+
+```yaml
+Subchapter:
+  id: string
+    description: "Unique identifier within the module (e.g., '1.1', '2.3')"
+    pattern: "^[1-5]\\.[1-9][0-9]?$"
+  module_id: string
+    description: "Reference to parent module"
+    pattern: "^(module[1-4]|capstone)$"
+  title: string
+    description: "Display title of the subchapter"
+    minLength: 5
+    maxLength: 100
+  content: string
+    description: "Main content of the subchapter"
+    minLength: 50
+  code_examples: array[CodeBlock]
+    description: "Code examples in this subchapter"
+    maxItems: 10
+  diagrams: array[Image]
+    description: "Diagrams and images in this subchapter"
+    maxItems: 2
+  word_count: integer
+    description: "Actual word count of the subchapter"
+    minimum: 100
+    maximum: 600
+  content_types: array[string]
+    description: "Content types used in this subchapter"
+    items:
+      enum: [text, code, image, diagram, table]
+  position: integer
+    description: "Position in the module sequence"
+    minimum: 1
+    maximum: 10
+```
+
+### CodeBlock Entity
+
+```yaml
+CodeBlock:
+  id: string
+    description: "Unique identifier within parent subchapter"
+  language: string
+    description: "Programming language of the code"
+    enum: [python, bash, yaml, json]
+  code: string
+    description: "The actual code content"
+    maxLength: 5000
+  line_count: integer
+    description: "Number of lines in the code block"
+    minimum: 1
+    maximum: 20
+  description: string
+    description: "Brief explanation of the code's purpose"
+    maxLength: 200
+  caption: string (optional)
+    description: "Optional caption for the code block"
+    maxLength: 100
+```
+
+### Image Entity
+
+```yaml
+Image:
+  id: string
+    description: "Unique identifier within parent subchapter"
+  filename: string
+    description: "Name of the image file"
+    pattern: "^[a-z0-9-]+\\.(svg|png)$"
+  alt_text: string
+    description: "Alternative text for accessibility"
+    minLength: 5
+    maxLength: 200
+  caption: string (optional)
+    description: "Optional caption for the image"
+    maxLength: 200
+  type: string
+    description: "Type of image"
+    enum: [diagram, screenshot, chart, photo]
+  path: string
+    description: "Relative path to the image file"
+    pattern: "^/img/(module[1-4]|capstone)/[a-z0-9-]+\\.(svg|png)$"
+```
+
+## Content Access API
+
+### Get Module Content
+```
+GET /api/modules/{moduleId}
+```
+
+**Path Parameters**:
+- `moduleId`: The ID of the module to retrieve
+
+**Response**:
+```json
+{
+  "id": "module1",
+  "title": "The Robotic Nervous System (ROS 2)",
+  "description": "Introduction to ROS 2 concepts and architecture",
+  "subchapters": [
+    {
+      "id": "1.1",
+      "title": "Introduction to ROS 2",
+      "content": "Markdown content...",
+      "position": 1
+    }
+  ],
+  "word_count": 1200,
+  "content_types": ["text", "diagram"]
+}
+```
+
+### Get Subchapter Content
+```
+GET /api/modules/{moduleId}/subchapters/{subchapterId}
+```
+
+**Path Parameters**:
+- `moduleId`: The ID of the parent module
+- `subchapterId`: The ID of the subchapter to retrieve
+
+**Response**:
+```json
+{
+  "id": "1.1",
+  "module_id": "module1",
+  "title": "Introduction to ROS 2",
+  "content": "Full markdown content...",
+  "code_examples": [
+    {
+      "id": "1.1.1",
+      "language": "python",
+      "code": "# Python example\nprint('Hello ROS 2')",
+      "line_count": 2,
+      "description": "Basic ROS 2 hello world example"
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "1.1.1",
+      "filename": "ros2-architecture.svg",
+      "alt_text": "ROS 2 architecture diagram showing nodes, topics, and services",
+      "type": "diagram",
+      "path": "/img/module1/ros2-architecture.svg"
+    }
+  ],
+  "word_count": 400,
+  "content_types": ["text", "diagram"],
+  "position": 1
+}
+```
+
+## Validation Rules
+
+### Content Validation
+- All content must be in MDX format
+- Code blocks must be ≤20 lines
+- Images must be SVG or PNG format
+- Maximum 2 images per subchapter
+- Word count per module: 1000-1500 words
+- Total book word count: 3000-6000 words
+
+### File Structure Validation
+- Content files in `/docs/moduleX/` directories
+- Image files in `/static/img/moduleX/` directories
+- All filenames lowercase with hyphens
+- Proper relative paths for images
+
+## Error Handling
+
+### 404 Not Found
+- Module ID does not exist
+- Subchapter ID does not exist within module
+
+### 422 Unprocessable Entity
+- Content does not meet validation requirements
+- Invalid file format or structure
+- Missing required fields
+
+## Versioning
+
+This contract follows semantic versioning:
+- Major version changes indicate breaking changes to the API
+- Minor version changes add new optional fields or functionality
+- Patch version changes fix errors or clarify documentation

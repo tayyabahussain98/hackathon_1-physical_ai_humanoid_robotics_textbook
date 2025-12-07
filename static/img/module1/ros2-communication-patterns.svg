@@ -1,0 +1,123 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .publisher { fill: #4CAF50; stroke: #388E3C; stroke-width: 2px; rx: 10; ry: 10; }
+    .subscriber { fill: #2196F3; stroke: #0D47A1; stroke-width: 2px; rx: 10; ry: 10; }
+    .server { fill: #FF9800; stroke: #E65100; stroke-width: 2px; rx: 10; ry: 10; }
+    .client { fill: #9C27B0; stroke: #4A148C; stroke-width: 2px; rx: 10; ry: 10; }
+    .topic { fill: #E8F5E9; stroke: #4CAF50; stroke-width: 2px; rx: 10; ry: 10; }
+    .service { fill: #FFF3E0; stroke: #FF9800; stroke-width: 2px; rx: 10; ry: 10; }
+    .text { fill: black; font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; dominant-baseline: middle; }
+    .title { fill: black; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-anchor: middle; }
+    .legend-label { fill: black; font-family: Arial, sans-serif; font-size: 12px; }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="30" class="title">ROS 2 Communication Patterns in Humanoid Robotics</text>
+
+  <!-- Topic Communication Section -->
+  <text x="200" y="60" class="text" font-weight="bold">Publish-Subscribe (Topics)</text>
+
+  <!-- Publishers -->
+  <rect x="50" y="80" width="100" height="60" class="publisher"/>
+  <text x="100" y="110" class="text">Sensor</text>
+  <text x="100" y="130" class="text">Node</text>
+
+  <!-- Topic -->
+  <rect x="180" y="90" width="120" height="40" class="topic"/>
+  <text x="240" y="115" class="text">/sensor/data</text>
+
+  <!-- Subscribers -->
+  <rect x="330" y="70" width="100" height="60" class="subscriber"/>
+  <text x="380" y="100" class="text">Control</text>
+  <text x="380" y="120" class="text">Node</text>
+
+  <rect x="330" y="150" width="100" height="60" class="subscriber"/>
+  <text x="380" y="180" class="text">Perception</text>
+  <text x="380" y="200" class="text">Node</text>
+
+  <rect x="330" y="230" width="100" height="60" class="subscriber"/>
+  <text x="380" y="260" class="text">Logging</text>
+  <text x="380" y="280" class="text">Node</text>
+
+  <!-- Arrows for Topic Communication -->
+  <line x1="150" y1="110" x2="180" y2="110" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="300" y1="110" x2="330" y2="100" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="300" y1="110" x2="330" y2="180" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="300" y1="110" x2="330" y2="260" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Service Communication Section -->
+  <text x="600" y="60" class="text" font-weight="bold">Request-Response (Services)</text>
+
+  <!-- Service Client -->
+  <rect x="500" y="90" width="100" height="60" class="client"/>
+  <text x="550" y="120" class="text">Planning</text>
+  <text x="550" y="140" class="text">Node</text>
+
+  <!-- Service -->
+  <rect x="630" y="100" width="120" height="40" class="service"/>
+  <text x="690" y="125" class="text">/move_to_pose</text>
+
+  <!-- Service Server -->
+  <rect x="780" y="90" width="100" height="60" class="server"/>
+  <text x="830" y="120" class="text">Motion</text>
+  <text x="830" y="140" class="text">Controller</text>
+
+  <!-- Arrows for Service Communication -->
+  <line x1="600" y1="120" x2="630" y2="120" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="750" y1="120" x2="780" y2="120" stroke="black" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+
+  <!-- Bidirectional arrow for service request-response -->
+  <line x1="600" y1="130" x2="780" y2="130" stroke="black" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="690" y="150" class="text" font-size="10px">Request/Response</text>
+
+  <!-- Action Communication Section -->
+  <text x="400" y="330" class="text" font-weight="bold">Action Communication</text>
+
+  <!-- Action Client -->
+  <rect x="250" y="350" width="100" height="60" class="client"/>
+  <text x="300" y="380" class="text">Behavior</text>
+  <text x="300" y="400" class="text">Manager</text>
+
+  <!-- Action Server -->
+  <rect x="550" y="350" width="100" height="60" class="server"/>
+  <text x="600" y="380" class="text">Navigation</text>
+  <text x="600" y="400" class="text">Server</text>
+
+  <!-- Action Interface -->
+  <rect x="400" y="360" width="120" height="40" class="service"/>
+  <text x="460" y="385" class="text">/navigate_to_goal</text>
+
+  <!-- Arrows for Action Communication -->
+  <line x1="350" y1="380" x2="400" y2="380" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="520" y1="380" x2="550" y2="380" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Feedback arrow -->
+  <line x1="550" y1="390" x2="350" y2="390" stroke="black" stroke-width="1" stroke-dasharray="5,5" marker-start="url(#arrowstart)"/>
+  <text x="450" y="410" class="text" font-size="10px">Feedback</text>
+
+  <!-- Arrowhead definitions -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+    </marker>
+    <marker id="arrowstart" markerWidth="10" markerHeight="7"
+      refX="10" refY="3.5" orient="auto">
+      <polygon points="0 3.5, 10 0, 10 7" fill="black" />
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <text x="50" y="450" class="legend-label">Legend:</text>
+  <rect x="120" y="440" width="20" height="20" class="publisher"/>
+  <text x="150" y="450" class="legend-label">Publisher Node</text>
+
+  <rect x="250" y="440" width="20" height="20" class="subscriber"/>
+  <text x="280" y="450" class="legend-label">Subscriber Node</text>
+
+  <rect x="400" y="440" width="20" height="20" class="server"/>
+  <text x="430" y="450" class="legend-label">Service Server</text>
+
+  <rect x="550" y="440" width="20" height="20" class="client"/>
+  <text x="580" y="450" class="legend-label">Service Client</text>
+</svg>

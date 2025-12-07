@@ -1,0 +1,148 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .sensor { fill: #2196F3; stroke: #0D47A1; stroke-width: 2px; rx: 10; ry: 10; }
+    .processing { fill: #FF9800; stroke: #EF6C00; stroke-width: 2px; rx: 10; ry: 10; }
+    .environment { fill: #4CAF50; stroke: #388E3C; stroke-width: 2px; rx: 10; ry: 10; }
+    .robot { fill: #9C27B0; stroke: #7B1FA2; stroke-width: 2px; rx: 10; ry: 10; }
+    .connection { stroke: #666; stroke-width: 2px; marker-end: url(#arrowhead); }
+    .text { fill: black; font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; dominant-baseline: middle; }
+    .title { fill: black; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-anchor: middle; }
+    .label { fill: black; font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="30" class="title">Sensor Simulation Data Flow in Robotics</text>
+
+  <!-- Environment -->
+  <rect x="50" y="100" width="200" height="150" class="environment"/>
+  <text x="150" y="130" class="text">Physical</text>
+  <text x="150" y="150" class="text">Environment</text>
+  <text x="150" y="170" class="text">(Real World)</text>
+
+  <!-- Robot in Environment -->
+  <rect x="75" y="160" width="150" height="70" class="robot"/>
+  <text x="150" y="195" class="text" fill="white">Humanoid</text>
+  <text x="150" y="215" class="text" fill="white">Robot</text>
+
+  <!-- LiDAR Sensor -->
+  <circle cx="100" cy="170" r="15" class="sensor"/>
+  <text x="100" y="170" class="text" fill="white">L</text>
+
+  <!-- Camera Sensor -->
+  <circle cx="150" cy="170" r="15" class="sensor"/>
+  <text x="150" y="170" class="text" fill="white">C</text>
+
+  <!-- IMU Sensor -->
+  <circle cx="200" cy="170" r="15" class="sensor"/>
+  <text x="200" y="170" class="text" fill="white">I</text>
+
+  <!-- Simulation Engine -->
+  <rect x="300" y="100" width="200" height="150" class="processing"/>
+  <text x="400" y="130" class="text">Simulation</text>
+  <text x="400" y="150" class="text">Engine</text>
+  <text x="400" y="170" class="text">(Gazebo/Isaac Sim)</text>
+
+  <!-- LiDAR Simulation -->
+  <rect x="320" y="120" width="50" height="30" class="sensor"/>
+  <text x="345" y="135" class="text" fill="white">LiDAR</text>
+
+  <!-- Camera Simulation -->
+  <rect x="380" y="120" width="50" height="30" class="sensor"/>
+  <text x="405" y="135" class="text" fill="white">Cam</text>
+
+  <!-- IMU Simulation -->
+  <rect x="440" y="120" width="50" height="30" class="sensor"/>
+  <text x="465" y="135" class="text" fill="white">IMU</text>
+
+  <!-- Data Processing -->
+  <rect x="550" y="100" width="200" height="150" class="processing"/>
+  <text x="650" y="130" class="text">Data</text>
+  <text x="650" y="150" class="text">Processing</text>
+  <text x="650" y="170" class="text">&amp; Fusion</text>
+
+  <!-- Processed LiDAR -->
+  <rect x="570" y="120" width="50" height="30" class="sensor"/>
+  <text x="595" y="135" class="text" fill="white">LiDAR</text>
+
+  <!-- Processed Camera -->
+  <rect x="630" y="120" width="50" height="30" class="sensor"/>
+  <text x="655" y="135" class="text" fill="white">Cam</text>
+
+  <!-- Processed IMU -->
+  <rect x="690" y="120" width="50" height="30" class="sensor"/>
+  <text x="715" y="135" class="text" fill="white">IMU</text>
+
+  <!-- ROS 2 Interface -->
+  <rect x="300" y="300" width="200" height="100" class="processing"/>
+  <text x="400" y="330" class="text">ROS 2</text>
+  <text x="400" y="350" class="text">Interface</text>
+  <text x="400" y="370" class="text">(Topics & Services)</text>
+
+  <!-- ROS Topics -->
+  <rect x="320" y="320" width="50" height="25" class="sensor"/>
+  <text x="345" y="332" class="text" fill="white">/scan</text>
+
+  <rect x="380" y="320" width="50" height="25" class="sensor"/>
+  <text x="405" y="332" class="text" fill="white">/image</text>
+
+  <rect x="440" y="320" width="50" height="25" class="sensor"/>
+  <text x="465" y="332" class="text" fill="white">/imu</text>
+
+  <!-- AI/ML Processing -->
+  <rect x="550" y="300" width="200" height="100" class="processing"/>
+  <text x="650" y="330" class="text">AI/ML</text>
+  <text x="650" y="350" class="text">Processing</text>
+  <text x="650" y="370" class="text">(Perception & Planning)</text>
+
+  <!-- Output -->
+  <rect x="300" y="450" width="200" height="80" class="processing"/>
+  <text x="400" y="470" class="text">Robot</text>
+  <text x="400" y="490" class="text">Control Output</text>
+
+  <!-- Connections -->
+  <!-- Environment to Simulation -->
+  <line x1="250" y1="175" x2="300" y2="175" class="connection"/>
+
+  <!-- Simulation to Processing -->
+  <line x1="500" y1="175" x2="550" y2="175" class="connection"/>
+
+  <!-- Simulation to ROS -->
+  <line x1="400" y1="250" x2="400" y2="300" class="connection"/>
+
+  <!-- ROS to AI/ML -->
+  <line x1="500" y1="350" x2="550" y2="350" class="connection"/>
+
+  <!-- AI/ML to Control -->
+  <line x1="400" y1="400" x2="400" y2="450" class="connection"/>
+
+  <!-- Data flow arrows between processing stages -->
+  <line x1="345" y1="150" x2="345" y2="320" class="connection"/>
+  <line x1="405" y1="150" x2="405" y2="320" class="connection"/>
+  <line x1="465" y1="150" x2="465" y2="320" class="connection"/>
+
+  <line x1="595" y1="150" x2="595" y2="320" class="connection"/>
+  <line x1="655" y1="150" x2="655" y2="320" class="connection"/>
+  <line x1="715" y1="150" x2="715" y2="320" class="connection"/>
+
+  <!-- Labels -->
+  <text x="400" y="60" class="label">Sensor Simulation and Data Flow Architecture</text>
+
+  <!-- Arrowhead definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <text x="650" y="520" class="label" font-weight="bold">Legend:</text>
+  <rect x="620" y="540" width="20" height="15" class="sensor"/>
+  <text x="670" y="550" class="label">Sensors</text>
+
+  <rect x="620" y="565" width="20" height="15" class="processing"/>
+  <text x="670" y="575" class="label">Processing</text>
+
+  <rect x="620" y="590" width="20" height="15" class="environment"/>
+  <text x="670" y="600" class="label">Environment</text>
+</svg>

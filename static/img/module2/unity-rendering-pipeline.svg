@@ -1,0 +1,125 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .pipeline-stage { fill: #E0E0E0; stroke: #9E9E9E; stroke-width: 2px; rx: 10; ry: 10; }
+    .renderer { fill: #4CAF50; stroke: #388E3C; stroke-width: 2px; rx: 10; ry: 10; }
+    .sensor-data { fill: #2196F3; stroke: #0D47A1; stroke-width: 2px; rx: 10; ry: 10; }
+    .output { fill: #FF9800; stroke: #EF6C00; stroke-width: 2px; rx: 10; ry: 10; }
+    .connection { stroke: #666; stroke-width: 2px; marker-end: url(#arrowhead); }
+    .text { fill: black; font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; dominant-baseline: middle; }
+    .title { fill: black; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-anchor: middle; }
+    .label { fill: black; font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+    .highlight { fill: #FFEB3B; stroke: #F57F17; stroke-width: 2px; rx: 10; ry: 10; }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="30" class="title">Unity Rendering Pipeline for Robotics</text>
+
+  <!-- Input Scene -->
+  <rect x="50" y="100" width="150" height="100" class="pipeline-stage"/>
+  <text x="125" y="130" class="text">Scene</text>
+  <text x="125" y="150" class="text">Geometry</text>
+  <text x="125" y="170" class="text">&amp; Materials</text>
+
+  <!-- HDRP/URP Selection -->
+  <rect x="250" y="80" width="150" height="140" class="pipeline-stage"/>
+  <text x="325" y="110" class="text">Rendering</text>
+  <text x="325" y="130" class="text">Pipeline</text>
+  <text x="325" y="150" class="text">(HDRP/URP)</text>
+
+  <!-- Lighting System -->
+  <rect x="450" y="100" width="150" height="100" class="pipeline-stage"/>
+  <text x="525" y="130" class="text">Lighting</text>
+  <text x="525" y="150" class="text">System</text>
+
+  <!-- Shading Stage -->
+  <rect x="650" y="100" width="150" height="100" class="pipeline-stage"/>
+  <text x="725" y="130" class="text">Shading</text>
+  <text x="725" y="150" class="text">&amp; Effects</text>
+
+  <!-- Camera Component -->
+  <rect x="100" y="250" width="150" height="100" class="renderer"/>
+  <text x="175" y="280" class="text">Camera</text>
+  <text x="175" y="300" class="text">Component</text>
+
+  <!-- Material System -->
+  <rect x="300" y="250" width="150" height="100" class="renderer"/>
+  <text x="375" y="280" class="text">Material</text>
+  <text x="375" y="300" class="text">System</text>
+
+  <!-- Texture System -->
+  <rect x="500" y="250" width="150" height="100" class="renderer"/>
+  <text x="575" y="280" class="text">Texture</text>
+  <text x="575" y="300" class="text">System</text>
+
+  <!-- Post-Processing -->
+  <rect x="650" y="250" width="150" height="100" class="renderer"/>
+  <text x="725" y="280" class="text">Post-</text>
+  <text x="725" y="300" class="text">Processing</text>
+
+  <!-- RGB Output -->
+  <rect x="50" y="400" width="150" height="80" class="output"/>
+  <text x="125" y="420" class="text">RGB Output</text>
+  <text x="125" y="440" class="text">(synthetic images)</text>
+
+  <!-- Depth Output -->
+  <rect x="250" y="400" width="150" height="80" class="output"/>
+  <text x="325" y="420" class="text">Depth Map</text>
+  <text x="325" y="440" class="text">(distance data)</text>
+
+  <!-- Semantic Segmentation -->
+  <rect x="450" y="400" width="150" height="80" class="output"/>
+  <text x="525" y="420" class="text">Semantic</text>
+  <text x="525" y="440" class="text">Segmentation</text>
+
+  <!-- Instance Segmentation -->
+  <rect x="650" y="400" width="150" height="80" class="output"/>
+  <text x="725" y="420" class="text">Instance</text>
+  <text x="725" y="440" class="text">Segmentation</text>
+
+  <!-- Sensor Simulation Module -->
+  <rect x="250" y="500" width="300" height="80" class="sensor-data"/>
+  <text x="400" y="520" class="text">Robotics Sensor</text>
+  <text x="400" y="540" class="text">Simulation Module</text>
+
+  <!-- Connections -->
+  <line x1="200" y1="150" x2="250" y2="150" class="connection"/>
+  <line x1="400" y1="150" x2="450" y2="150" class="connection"/>
+  <line x1="600" y1="150" x2="650" y2="150" class="connection"/>
+
+  <line x1="175" y1="200" x2="175" y2="250" class="connection"/>
+  <line x1="375" y1="200" x2="375" y2="250" class="connection"/>
+  <line x1="575" y1="200" x2="575" y2="250" class="connection"/>
+  <line x1="725" y1="200" x2="725" y2="250" class="connection"/>
+
+  <line x1="175" y1="350" x2="125" y2="400" class="connection"/>
+  <line x1="375" y1="350" x2="325" y2="400" class="connection"/>
+  <line x1="575" y1="350" x2="525" y2="400" class="connection"/>
+  <line x1="725" y1="350" x2="725" y2="400" class="connection"/>
+
+  <line x1="125" y1="480" x2="400" y2="500" class="connection"/>
+  <line x1="325" y1="480" x2="400" y2="500" class="connection"/>
+  <line x1="525" y1="480" x2="400" y2="500" class="connection"/>
+  <line x1="725" y1="480" x2="400" y2="500" class="connection"/>
+
+  <!-- Labels -->
+  <text x="400" y="60" class="label">Unity Rendering Pipeline for Humanoid Robotics</text>
+
+  <!-- Arrowhead definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <text x="650" y="520" class="label" font-weight="bold">Legend:</text>
+  <rect x="620" y="540" width="20" height="15" class="pipeline-stage"/>
+  <text x="670" y="550" class="label">Pipeline Stage</text>
+
+  <rect x="620" y="565" width="20" height="15" class="renderer"/>
+  <text x="670" y="575" class="label">Renderer</text>
+
+  <rect x="620" y="590" width="20" height="15" class="output"/>
+  <text x="670" y="600" class="label">Output</text>
+</svg>
