@@ -274,6 +274,9 @@ class LitellmModel:
             return response_content
         except Exception as e:
             print(f"Error calling LLM: {str(e)}")
+            # Check if it's a rate limit error and provide a helpful message
+            if "rate" in str(e).lower() or "quota" in str(e).lower() or "429" in str(e):
+                return "I've reached my API usage limit for now. Please try again later or check the project's billing details for the Gemini API."
             return f"Sorry, I encountered an error: {str(e)}"
 
 

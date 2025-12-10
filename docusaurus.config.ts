@@ -66,16 +66,6 @@ const config: Config = {
         theme: {
           customCss: "./src/css/custom.css",
         },
-        scripts: [
-          {
-            src: "http://localhost:3000/page.js",
-            defer: true,
-          },
-          {
-            src: "https://my-book-chatbot-frontend.vercel.app/page.js",
-            defer: true,
-          }
-        ],
       } satisfies Preset.Options,
     ],
   ],
@@ -101,7 +91,7 @@ const config: Config = {
       logo: {
         alt: "Physical AI & Humanoid Robotics Logo",
         src: "/img/logo.jpg",
-        width: 58, // ← yeh badhao (default 32 hota hai)
+        width: 58,
         height: 58,
       },
       items: [

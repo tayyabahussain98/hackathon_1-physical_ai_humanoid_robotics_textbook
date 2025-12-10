@@ -105,7 +105,7 @@ export default function Home() {
 
     try {
       // Call backend API
-      const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL!,
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/chat/default_thread`, // Using a default thread ID
         {
           method: "POST",
           headers: {
