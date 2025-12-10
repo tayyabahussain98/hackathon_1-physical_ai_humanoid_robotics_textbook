@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+openai-chatkit
+openai-agents[litellm]>=0.6.2
+litellm>=1.44.0
+qdrant-client
+psycopg2-binary
+python-dotenv
+langchain-text-splitters
+tqdm
+beautifulsoup4

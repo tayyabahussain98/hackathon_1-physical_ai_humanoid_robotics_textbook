@@ -66,6 +66,16 @@ const config: Config = {
         theme: {
           customCss: "./src/css/custom.css",
         },
+        scripts: [
+          {
+            src: "http://localhost:3000/page.js",
+            defer: true,
+          },
+          {
+            src: "https://my-book-chatbot-frontend.vercel.app/page.js",
+            defer: true,
+          }
+        ],
       } satisfies Preset.Options,
     ],
   ],
@@ -76,6 +86,16 @@ const config: Config = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
+    scripts: [
+      {
+        src: "http://localhost:3000/page.js",
+        defer: true,
+      },
+      {
+        src: "https://my-book-chatbot-frontend.vercel.app/page.js",
+        defer: true,
+      }
+    ],
     navbar: {
       title: "Physical AI & Humanoid Robotics",
       logo: {

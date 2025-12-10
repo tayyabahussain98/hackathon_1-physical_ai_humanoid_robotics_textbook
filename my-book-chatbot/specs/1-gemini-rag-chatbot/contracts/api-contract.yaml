@@ -1,0 +1,362 @@
+openapi: 3.0.0
+info:
+  title: Gemini RAG Chatbot API
+  description: API for the Gemini RAG Chatbot embedded in documentation sites
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://api.example.com
+    description: Production server
+
+paths:
+  /api/chat:
+    post:
+      summary: Process a chat message with RAG context
+      description: Send a user message and receive an AI response based on documentation context
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+                - conversation_id
+              properties:
+                message:
+                  type: string
+                  description: The user's message
+                  example: "What does this function do?"
+                conversation_id:
+                  type: string
+                  description: ID of the conversation (use 'new' for new conversation)
+                  example: "conv_12345"
+                selected_text:
+                  type: string
+                  description: Text that was selected/highlighted by the user
+                  example: "This is the function that handles authentication"
+                context:
+                  type: object
+                  description: Additional context for the query
+                  properties:
+                    document_id:
+                      type: string
+                      description: ID of the document where selection occurred
+                    url:
+                      type: string
+                      description: URL of the page where selection occurred
+      responses:
+        '200':
+          description: Successful response with AI message
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - content
+                  - sources
+                  - conversation_id
+                properties:
+                  id:
+                    type: string
+                    description: ID of the response message
+                    example: "msg_67890"
+                  content:
+                    type: string
+                    description: The AI's response content
+                    example: "This function handles user authentication by verifying credentials..."
+                  sources:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Source'
+                  conversation_id:
+                    type: string
+                    description: ID of the conversation
+                    example: "conv_12345"
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: When the response was created
+                    example: "2025-12-10T10:30:00Z"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/ingest:
+    post:
+      summary: Ingest documentation content
+      description: Ingest documentation content into the vector database for RAG
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - documents
+              properties:
+                documents:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DocumentInput'
+                options:
+                  type: object
+                  properties:
+                    chunk_size:
+                      type: integer
+                      description: Size of text chunks for vectorization
+                      default: 1000
+                    overlap:
+                      type: integer
+                      description: Overlap between chunks
+                      default: 200
+      responses:
+        '200':
+          description: Documentation successfully ingested
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  documents_processed:
+                    type: integer
+                    example: 5
+                  chunks_created:
+                    type: integer
+                    example: 23
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/health:
+    get:
+      summary: Health check endpoint
+      description: Check the health status of the API
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2025-12-10T10:30:00Z"
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+
+  /api/conversations/{conversation_id}:
+    get:
+      summary: Get conversation history
+      description: Retrieve the history of messages in a conversation
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the conversation to retrieve
+      responses:
+        '200':
+          description: Conversation history retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conversation:
+                    $ref: '#/components/schemas/Conversation'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  schemas:
+    DocumentInput:
+      type: object
+      required:
+        - id
+        - content
+        - metadata
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the document
+          example: "doc_001"
+        content:
+          type: string
+          description: The document content
+          example: "This is the full content of the documentation page..."
+        metadata:
+          type: object
+          description: Additional metadata about the document
+          properties:
+            title:
+              type: string
+              description: Title of the document
+            url:
+              type: string
+              description: URL of the document
+            source:
+              type: string
+              description: Source identifier
+            tags:
+              type: array
+              items:
+                type: string
+              description: Tags associated with the document
+
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the source
+          example: "src_123"
+        document_id:
+          type: string
+          description: ID of the referenced document
+          example: "doc_001"
+        snippet:
+          type: string
+          description: Relevant text snippet from the document
+          example: "This function handles user authentication..."
+        url:
+          type: string
+          description: URL to the original documentation location
+          example: "https://example.com/docs/auth"
+        relevance_score:
+          type: number
+          format: float
+          description: Score indicating relevance to the query
+          example: 0.85
+
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the conversation
+          example: "conv_12345"
+        title:
+          type: string
+          description: Auto-generated title for the conversation
+          example: "Authentication function explanation"
+        created_at:
+          type: string
+          format: date-time
+          description: When the conversation was created
+          example: "2025-12-10T10:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: When the conversation was last updated
+          example: "2025-12-10T10:30:00Z"
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the message
+          example: "msg_67890"
+        role:
+          type: string
+          enum: [user, assistant]
+          description: Role of the message sender
+          example: "assistant"
+        content:
+          type: string
+          description: Content of the message
+          example: "This function handles user authentication..."
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+        created_at:
+          type: string
+          format: date-time
+          description: When the message was created
+          example: "2025-12-10T10:30:00Z"
+
+  responses:
+    BadRequest:
+      description: Bad request - invalid input format
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Invalid input format"
+              details:
+                type: string
+                example: "Message field is required"
+
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Unauthorized"
+
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Internal server error"
+
+    ServiceUnavailable:
+      description: Service unavailable - external dependency failure
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Service temporarily unavailable"
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Conversation not found"
