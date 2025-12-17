@@ -1,0 +1,109 @@
+Metadata-Version: 2.4
+Name: website-ingestion-rag
+Version: 0.1.0
+Summary: Website Ingestion & Vectorization for RAG
+Author-email: Claude Code <claude@example.com>
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.31.0
+Requires-Dist: beautifulsoup4>=4.12.2
+Requires-Dist: cohere>=4.0.0
+Requires-Dist: qdrant-client>=1.7.0
+Requires-Dist: python-dotenv>=1.0.0
+
+# Website Ingestion & Vectorization for RAG
+
+This tool crawls Docusaurus GitHub Pages sites, extracts documentation content, generates semantic embeddings using Cohere, and stores vectors with metadata in Qdrant Cloud for RAG applications.
+
+## Prerequisites
+
+- Python 3.10+
+- UV package manager
+- Cohere API key
+- Qdrant Cloud account and API key
+
+## Setup
+
+1. **Install dependencies using UV:**
+   ```bash
+   uv venv  # Create virtual environment
+   source .venv/bin/activate  # Activate environment (Linux/Mac)
+   # On Windows: source .venv/Scripts/activate
+   uv pip install -r requirements.txt
+   ```
+
+2. **Configure environment variables:**
+   Copy the example environment file and update with your credentials:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your Cohere and Qdrant credentials
+   ```
+
+## Usage
+
+Run the tool with required parameters:
+
+```bash
+python main.py --url "https://example.github.io/docs" [options]
+```
+
+### Command Line Options
+
+- `--url` (required): Base URL of the Docusaurus site to crawl
+- `--max-pages`: Maximum number of pages to crawl (default: 500)
+- `--max-depth`: Maximum depth for crawling (default: 3)
+- `--chunk-size`: Size of text chunks in characters (default: 1000)
+- `--chunk-overlap`: Overlap between chunks in characters (default: 100)
+- `--max-retries`: Maximum number of retries for failed requests (default: 3)
+- `--log-level`: Logging level (DEBUG, INFO, WARNING, ERROR) (default: INFO)
+
+### Example Usage
+
+```bash
+# Basic usage
+python main.py --url "https://tayyabahussain98.github.io/hackathon_1-physical_ai_humanoid_robotics_textbook/"
+
+# With custom parameters
+python main.py --url "https://example.github.io/docs" --max-pages 100 --chunk-size 2000 --log-level DEBUG
+```
+
+## Configuration
+
+The tool uses the following environment variables:
+
+- `COHERE_API_KEY`: Your Cohere API key
+- `QDRANT_URL`: Your Qdrant Cloud URL
+- `QDRANT_API_KEY`: Your Qdrant API key
+- `MAX_PAGES`: Default maximum pages to crawl (default: 500)
+- `CRAWL_DEPTH`: Default maximum crawl depth (default: 3)
+- `CHUNK_SIZE`: Default chunk size in characters (default: 1000)
+- `CHUNK_OVERLAP`: Default chunk overlap in characters (default: 100)
+- `MAX_RETRIES`: Default maximum retries for failed requests (default: 3)
+
+## Architecture
+
+The tool follows these steps:
+
+1. **URL Discovery**: Extracts all accessible URLs from the target Docusaurus site using both crawling and sitemap parsing
+2. **Content Extraction**: Extracts clean text content from each page, preserving titles and structure
+3. **Text Chunking**: Splits content into manageable chunks with configurable size and overlap
+4. **Embedding Generation**: Creates semantic embeddings using Cohere's API
+5. **Vector Storage**: Stores embeddings with metadata in Qdrant Cloud
+
+## Features
+
+- **Robust Error Handling**: Implements retry mechanisms with exponential backoff for network requests
+- **Duplicate Detection**: Prevents storing duplicate content in Qdrant
+- **Performance Monitoring**: Tracks execution time for each pipeline stage
+- **Configurable Parameters**: Allows customization of crawl depth, chunk size, and other parameters
+- **Progress Tracking**: Provides detailed logging of pipeline progress
+- **Content Sanitization**: Removes potentially harmful HTML elements from extracted content
+
+## Output
+
+The tool stores vectors in a Qdrant collection named `rag_embedding` with the following metadata:
+- `content`: The text content of the chunk
+- `source_url`: The URL where the content was found
+- `title`: The page title
+- `start_pos`: Starting position of the chunk in the original document
+- `end_pos`: Ending position of the chunk in the original document
