@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  title: Chat Integration API
+  description: API contracts for the chat component integration with Docusaurus
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Docusaurus development server
+  - url: http://localhost:8000
+    description: FastAPI RAG backend
+
+paths:
+  /api/chat:
+    post:
+      summary: Send a message to the chat system
+      description: Processes user input and returns a response from the RAG system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  description: The user's message/question
+                  example: "What is the purpose of this documentation?"
+                context:
+                  type: string
+                  description: Optional context from selected text
+                  example: "The following section describes the architecture..."
+                sessionId:
+                  type: string
+                  description: Optional session identifier for conversation history
+                  example: "session-12345"
+      responses:
+        '200':
+          description: Successful response from the chat system
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "msg-67890"
+                  content:
+                    type: string
+                    description: The response content from the RAG system
+                    example: "This documentation provides guidance on how to use the system..."
+                  sources:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        url:
+                          type: string
+                        content:
+                          type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+        '400':
+          description: Bad request - invalid input
+        '500':
+          description: Internal server error - RAG backend unavailable
+
+  /api/chat/session:
+    post:
+      summary: Create a new chat session
+      description: Initializes a new chat session with optional initial context
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                initialContext:
+                  type: string
+                  description: Initial context for the session, such as selected text
+                  example: "User has selected this text for clarification..."
+      responses:
+        '200':
+          description: New session created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - sessionId
+                properties:
+                  sessionId:
+                    type: string
+                    example: "session-12345"
+                  createdAt:
+                    type: string
+                    format: date-time
+        '500':
+          description: Internal server error
+
+  /api/chat/context:
+    post:
+      summary: Set context for the current session
+      description: Updates the context of the current session, typically with selected text
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionId
+                - context
+              properties:
+                sessionId:
+                  type: string
+                  example: "session-12345"
+                context:
+                  type: string
+                  description: Context to be added to the session
+                  example: "Selected text content goes here..."
+      responses:
+        '200':
+          description: Context updated successfully
+        '400':
+          description: Invalid session ID or context
+        '404':
+          description: Session not found

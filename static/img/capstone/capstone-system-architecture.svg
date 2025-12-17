@@ -1,0 +1,195 @@
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .module { fill: #2196F3; stroke: #0D47A1; stroke-width: 2px; rx: 10; ry: 10; }
+    .component { fill: #FF9800; stroke: #EF6C00; stroke-width: 2px; rx: 8; ry: 8; }
+    .data { fill: #4CAF50; stroke: #388E3C; stroke-width: 2px; rx: 8; ry: 8; }
+    .robot { fill: #9C27B0; stroke: #7B1FA2; stroke-width: 2px; rx: 10; ry: 10; }
+    .connection { stroke: #666; stroke-width: 2px; marker-end: url(#arrowhead); }
+    .text { fill: black; font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; dominant-baseline: middle; }
+    .title { fill: black; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-anchor: middle; }
+    .label { fill: black; font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+    .highlight { fill: #E91E63; stroke: #C2185B; stroke-width: 2px; rx: 10; ry: 10; }
+  </style>
+
+  <!-- Title -->
+  <text x="500" y="30" class="title">Autonomous Humanoid System Architecture</text>
+
+  <!-- Main System Container -->
+  <rect x="50" y="60" width="900" height="700" fill="none" stroke="#333" stroke-width="3" rx="15" ry="15"/>
+  <text x="500" y="80" class="text" font-weight="bold" font-size="14">Autonomous Humanoid System</text>
+
+  <!-- Voice Command System -->
+  <rect x="80" y="100" width="250" height="180" class="module"/>
+  <text x="205" y="120" class="text" font-weight="bold" fill="white">Voice Command System</text>
+
+  <!-- Voice Components -->
+  <rect x="100" y="140" width="210" height="30" class="component"/>
+  <text x="205" y="155" class="text" fill="white" font-size="12">Audio Input & Preprocessing</text>
+
+  <rect x="100" y="180" width="210" height="30" class="component"/>
+  <text x="205" y="195" class="text" fill="white" font-size="12">Speech Recognition (Whisper)</text>
+
+  <rect x="100" y="220" width="210" height="30" class="component"/>
+  <text x="205" y="235" class="text" fill="white" font-size="12">Intent Parser & NLP</text>
+
+  <rect x="100" y="260" width="210" height="30" class="component"/>
+  <text x="205" y="275" class="text" fill="white" font-size="12">Command Validator</text>
+
+  <!-- Navigation System -->
+  <rect x="80" y="310" width="250" height="200" class="module"/>
+  <text x="205" y="330" class="text" font-weight="bold" fill="white">Navigation System</text>
+
+  <!-- Navigation Components -->
+  <rect x="100" y="350" width="210" height="30" class="component"/>
+  <text x="205" y="365" class="text" fill="white" font-size="12">Localization (AMCL)</text>
+
+  <rect x="100" y="390" width="210" height="30" class="component"/>
+  <text x="205" y="405" class="text" fill="white" font-size="12">Mapping (SLAM)</text>
+
+  <rect x="100" y="430" width="210" height="30" class="component"/>
+  <text x="205" y="445" class="text" fill="white" font-size="12">Path Planning (Nav2)</text>
+
+  <rect x="100" y="470" width="210" height="30" class="component"/>
+  <text x="205" y="485" class="text" fill="white" font-size="12">Obstacle Detection & Avoidance</text>
+
+  <!-- Perception System -->
+  <rect x="360" y="100" width="280" height="180" class="module"/>
+  <text x="500" y="120" class="text" font-weight="bold" fill="white">Perception System</text>
+
+  <!-- Perception Components -->
+  <rect x="380" y="140" width="240" height="30" class="component"/>
+  <text x="500" y="155" class="text" fill="white" font-size="12">RGB-D Camera Processing</text>
+
+  <rect x="380" y="180" width="240" height="30" class="component"/>
+  <text x="500" y="195" class="text" fill="white" font-size="12">Object Detection (YOLO/Isaac)</text>
+
+  <rect x="380" y="220" width="240" height="30" class="component"/>
+  <text x="500" y="235" class="text" fill="white" font-size="12">3D Position Estimation</text>
+
+  <rect x="380" y="260" width="240" height="30" class="component"/>
+  <text x="500" y="275" class="text" fill="white" font-size="12">Object Classification</text>
+
+  <!-- Manipulation System -->
+  <rect x="360" y="310" width="280" height="160" class="module"/>
+  <text x="500" y="330" class="text" font-weight="bold" fill="white">Manipulation System</text>
+
+  <!-- Manipulation Components -->
+  <rect x="380" y="350" width="240" height="30" class="component"/>
+  <text x="500" y="365" class="text" fill="white" font-size="12">Grasp Planning</text>
+
+  <rect x="380" y="390" width="240" height="30" class="component"/>
+  <text x="500" y="405" class="text" fill="white" font-size="12">Inverse Kinematics</text>
+
+  <rect x="380" y="430" width="240" height="30" class="component"/>
+  <text x="500" y="445" class="text" fill="white" font-size="12">Arm Control</text>
+
+  <rect x="380" y="470" width="240" height="30" class="component"/>
+  <text x="500" y="485" class="text" fill="white" font-size="12">Gripper Control</text>
+
+  <!-- Task Planning System -->
+  <rect x="670" y="100" width="230" height="160" class="module"/>
+  <text x="785" y="120" class="text" font-weight="bold" fill="white">Task Planning</text>
+
+  <!-- Task Planning Components -->
+  <rect x="690" y="140" width="190" height="30" class="component"/>
+  <text x="785" y="155" class="text" fill="white" font-size="12">Task Sequencer</text>
+
+  <rect x="690" y="180" width="190" height="30" class="component"/>
+  <text x="785" y="195" class="text" fill="white" font-size="12">Action Executor</text>
+
+  <rect x="690" y="220" width="190" height="30" class="component"/>
+  <text x="785" y="235" class="text" fill="white" font-size="12">State Manager</text>
+
+  <rect x="690" y="260" width="190" height="30" class="component"/>
+  <text x="785" y="275" class="text" fill="white" font-size="12">Recovery Behaviors</text>
+
+  <!-- Robot Hardware -->
+  <rect x="670" y="310" width="230" height="200" class="robot"/>
+  <text x="785" y="330" class="text" font-weight="bold" fill="white">Robot Hardware</text>
+
+  <!-- Robot Components -->
+  <rect x="690" y="350" width="190" height="30" class="component"/>
+  <text x="785" y="365" class="text" fill="white" font-size="12">Joint Controllers</text>
+
+  <rect x="690" y="390" width="190" height="30" class="component"/>
+  <text x="785" y="405" class="text" fill="white" font-size="12">Sensor Interfaces</text>
+
+  <rect x="690" y="430" width="190" height="30" class="component"/>
+  <text x="785" y="445" class="text" fill="white" font-size="12">Motor Drivers</text>
+
+  <rect x="690" y="470" width="190" height="30" class="component"/>
+  <text x="785" y="485" class="text" fill="white" font-size="12">Safety Systems</text>
+
+  <!-- Data Flows -->
+  <!-- Voice to Task Planning -->
+  <line x1="205" y1="290" x2="785" y2="140" class="connection"/>
+
+  <!-- Navigation to Robot -->
+  <line x1="205" y1="510" x2="785" y2="350" class="connection"/>
+
+  <!-- Perception to Manipulation -->
+  <line x1="500" y1="290" x2="500" y2="350" class="connection"/>
+
+  <!-- Perception to Task Planning -->
+  <line x1="500" y1="290" x2="785" y2="140" class="connection"/>
+
+  <!-- Manipulation to Robot -->
+  <line x1="500" y1="510" x2="785" y2="350" class="connection"/>
+
+  <!-- Task Planning to Robot -->
+  <line x1="785" y1="290" x2="785" y2="350" class="connection"/>
+
+  <!-- Human User -->
+  <circle cx="205" cy="550" r="40" class="highlight"/>
+  <text x="205" y="550" class="text" font-weight="bold" fill="white">Human User</text>
+  <text x="205" y="575" class="text" fill="white" font-size="10">Voice Commands</text>
+
+  <!-- Environment -->
+  <rect x="80" y="550" width="500" height="180" fill="#8B4513" stroke="#654321" stroke-width="2" rx="10" ry="10"/>
+  <text x="330" y="570" class="text" font-weight="bold" fill="white">Environment</text>
+
+  <!-- Objects in Environment -->
+  <circle cx="150" cy="600" r="15" fill="#FF5722" stroke="#E64A19" stroke-width="1"/>
+  <text x="150" y="600" class="text" fill="white" font-size="8">Cup</text>
+
+  <rect cx="250" cy="600" x="235" y="590" width="30" height="20" fill="#4CAF50" stroke="#388E3C" stroke-width="1"/>
+  <text x="250" y="600" class="text" fill="white" font-size="8">Book</text>
+
+  <rect cx="350" cy="600" x="335" y="590" width="30" height="15" fill="#2196F3" stroke="#0D47A1" stroke-width="1"/>
+  <text x="350" y="600" class="text" fill="white" font-size="8">Phone</text>
+
+  <circle cx="450" cy="600" r="12" fill="#9C27B0" stroke="#7B1FA2" stroke-width="1"/>
+  <text x="450" y="600" class="text" fill="white" font-size="8">Keys</text>
+
+  <!-- Data Flow Labels -->
+  <text x="500" y="300" class="label" font-weight="bold">Object Data</text>
+  <text x="640" y="190" class="label" font-weight="bold">Commands</text>
+  <text x="640" y="430" class="label" font-weight="bold">Control Signals</text>
+
+  <!-- Arrowhead definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <rect x="800" y="600" width="150" height="130" fill="none" stroke="#333" stroke-width="1"/>
+  <text x="875" y="615" class="text" font-weight="bold">Legend</text>
+
+  <rect x="810" y="630" width="15" height="10" class="module"/>
+  <text x="860" y="635" class="label" font-size="10">System Module</text>
+
+  <rect x="810" y="650" width="15" height="10" class="component"/>
+  <text x="860" y="655" class="label" font-size="10">Component</text>
+
+  <rect x="810" y="670" width="15" height="10" class="robot"/>
+  <text x="860" y="675" class="label" font-size="10">Robot Hardware</text>
+
+  <circle cx="818" cy="690" r="5" class="highlight"/>
+  <text x="860" y="695" class="label" font-size="10">Human User</text>
+
+  <line x1="810" y1="710" x2="825" y2="710" class="connection"/>
+  <text x="860" y="715" class="label" font-size="10">Data Flow</text>
+</svg>

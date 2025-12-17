@@ -1,0 +1,65 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .node { fill: #4CAF50; stroke: #388E3C; stroke-width: 2px; rx: 10; ry: 10; }
+    .topic { fill: #2196F3; stroke: #0D47A1; stroke-width: 2px; rx: 10; ry: 10; }
+    .service { fill: #FF9800; stroke: #E65100; stroke-width: 2px; rx: 10; ry: 10; }
+    .middleware { fill: #9C27B0; stroke: #4A148C; stroke-width: 2px; rx: 10; ry: 10; }
+    .text { fill: white; font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; dominant-baseline: middle; }
+    .label { fill: black; font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+  </style>
+
+  <!-- ROS 2 Middleware (RMW) -->
+  <rect x="300" y="150" width="200" height="100" class="middleware"/>
+  <text x="400" y="180" class="text">ROS 2</text>
+  <text x="400" y="200" class="text">Middleware</text>
+  <text x="400" y="220" class="text">(RMW)</text>
+
+  <!-- Nodes -->
+  <rect x="100" y="50" width="120" height="60" class="node"/>
+  <text x="160" y="80" class="text">Camera</text>
+  <text x="160" y="100" class="text">Node</text>
+
+  <rect x="100" y="250" width="120" height="60" class="node"/>
+  <text x="160" y="280" class="text">Motion</text>
+  <text x="160" y="300" class="text">Controller</text>
+
+  <rect x="600" y="50" width="120" height="60" class="node"/>
+  <text x="660" y="80" class="text">Object</text>
+  <text x="660" y="100" class="text">Detector</text>
+
+  <rect x="600" y="250" width="120" height="60" class="node"/>
+  <text x="660" y="280" class="text">UI</text>
+  <text x="660" y="300" class="text">Node</text>
+
+  <!-- Topics -->
+  <rect x="320" y="50" width="160" height="40" class="topic"/>
+  <text x="400" y="70" class="text">/camera/image_raw</text>
+
+  <rect x="320" y="260" width="160" height="40" class="topic"/>
+  <text x="400" y="280" class="text">/joint_commands</text>
+
+  <!-- Arrows for communication -->
+  <!-- Camera Node to Topic -->
+  <line x1="220" y1="80" x2="320" y2="70" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <!-- Topic to Object Detector -->
+  <line x1="480" y1="70" x2="600" y2="80" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <!-- Motion Controller to Topic -->
+  <line x1="220" y1="280" x2="320" y2="280" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <!-- Topic to UI Node -->
+  <line x1="480" y1="280" x2="600" y2="280" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Middleware connections -->
+  <line x1="400" y1="150" x2="400" y2="110" stroke="#9C27B0" stroke-width="3" stroke-dasharray="5,5"/>
+  <line x1="400" y1="250" x2="400" y2="290" stroke="#9C27B0" stroke-width="3" stroke-dasharray="5,5"/>
+
+  <!-- Arrowhead definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+    </marker>
+  </defs>
+
+  <!-- Labels -->
+  <text x="400" y="30" class="label">ROS 2 Communication in Humanoid Robot</text>
+</svg>

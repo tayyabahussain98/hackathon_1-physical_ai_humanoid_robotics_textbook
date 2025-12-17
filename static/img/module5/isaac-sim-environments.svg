@@ -1,0 +1,171 @@
+<svg width="900" height="600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .environment { fill: #4CAF50; stroke: #388E3C; stroke-width: 2px; rx: 10; ry: 10; }
+    .robot { fill: #9C27B0; stroke: #7B1FA2; stroke-width: 2px; rx: 10; ry: 10; }
+    .sensor { fill: #2196F3; stroke: #0D47A1; stroke-width: 2px; rx: 10; ry: 10; }
+    .lighting { fill: #FFEB3B; stroke: #F57F17; stroke-width: 2px; rx: 10; ry: 10; }
+    .rendering { fill: #FF9800; stroke: #EF6C00; stroke-width: 2px; rx: 10; ry: 10; }
+    .connection { stroke: #666; stroke-width: 2px; marker-end: url(#arrowhead); }
+    .text { fill: black; font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; dominant-baseline: middle; }
+    .title { fill: black; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-anchor: middle; }
+    .label { fill: black; font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+    .highlight { fill: #E91E63; stroke: #C2185B; stroke-width: 2px; rx: 10; ry: 10; }
+  </style>
+
+  <!-- Title -->
+  <text x="450" y="30" class="title">Isaac Sim Environment and Scenarios</text>
+
+  <!-- Main Isaac Sim Environment -->
+  <rect x="50" y="80" width="800" height="480" class="environment" stroke-width="3"/>
+  <text x="450" y="110" class="text" font-size="18" font-weight="bold">Isaac Sim Environment</text>
+
+  <!-- Ground Plane -->
+  <rect x="100" y="450" width="700" height="80" fill="#8B4513" stroke="#654321" stroke-width="1"/>
+  <text x="450" y="480" class="text" fill="white">Ground Plane</text>
+
+  <!-- Humanoid Robot -->
+  <rect x="400" y="350" width="60" height="100" class="robot"/>
+  <text x="430" y="380" class="text" fill="white">Humanoid</text>
+  <text x="430" y="400" class="text" fill="white">Robot</text>
+
+  <!-- Robot Head -->
+  <circle cx="430" cy="340" r="15" class="robot"/>
+  <text x="430" y="340" class="text" fill="white" font-size="10">Head</text>
+
+  <!-- Robot Sensors -->
+  <!-- RGB Camera -->
+  <circle cx="420" cy="335" r="8" class="sensor"/>
+  <text x="420" y="335" class="text" fill="white" font-size="8">RGB</text>
+
+  <!-- Depth Camera -->
+  <circle cx="440" cy="335" r="8" class="sensor"/>
+  <text x="440" y="335" class="text" fill="white" font-size="8">D</text>
+
+  <!-- LiDAR -->
+  <circle cx="430" cy="355" r="8" class="sensor"/>
+  <text x="430" y="355" class="text" fill="white" font-size="8">L</text>
+
+  <!-- Indoor Environment Objects -->
+  <!-- Wall -->
+  <rect x="100" y="200" width="200" height="20" fill="#795548" stroke="#5D4037" stroke-width="1"/>
+  <text x="200" y="210" class="text" fill="white">Wall</text>
+
+  <!-- Table -->
+  <rect x="150" y="380" width="100" height="60" fill="#D2691E" stroke="#8B4513" stroke-width="1"/>
+  <rect x="150" y="370" width="100" height="10" fill="#8B4513" stroke="#5D2906" stroke-width="1"/>
+  <text x="200" y="400" class="text" fill="white">Table</text>
+
+  <!-- Chair -->
+  <rect x="280" y="400" width="30" height="40" fill="#A0522D" stroke="#654321" stroke-width="1"/>
+  <rect x="275" y="395" width="40" height="10" fill="#8B4513" stroke="#5D2906" stroke-width="1"/>
+  <text x="295" y="420" class="text" fill="white">Chair</text>
+
+  <!-- Outdoor Environment Objects -->
+  <!-- Trees -->
+  <rect x="650" y="400" width="10" height="60" fill="#8B4513" stroke="#5D2906" stroke-width="1"/>
+  <circle cx="655" cy="380" r="20" fill="#2E8B57" stroke="#228B22" stroke-width="1"/>
+  <text x="655" y="430" class="text" fill="white">Tree</text>
+
+  <rect x="700" y="410" width="8" height="50" fill="#8B4513" stroke="#5D2906" stroke-width="1"/>
+  <circle cx="704" cy="390" r="18" fill="#2E8B57" stroke="#228B22" stroke-width="1"/>
+  <text x="704" y="435" class="text" fill="white">Tree</text>
+
+  <!-- Obstacles -->
+  <circle cx="550" cy="420" r="25" fill="#795548" stroke="#5D4037" stroke-width="1"/>
+  <text x="550" y="420" class="text" fill="white">Obstacle</text>
+
+  <rect x="600" y="410" width="30" height="30" fill="#795548" stroke="#5D4037" stroke-width="1"/>
+  <text x="615" y="425" class="text" fill="white">Box</text>
+
+  <!-- Lighting System -->
+  <circle cx="450" cy="150" r="40" class="lighting"/>
+  <text x="450" y="150" class="text">Dome</text>
+  <text x="450" y="170" class="text">Light</text>
+
+  <!-- Sun Light -->
+  <circle cx="150" cy="120" r="20" fill="#FFD700" stroke="#FFA000" stroke-width="2"/>
+  <text x="150" y="120" class="text" font-size="10">Sun</text>
+
+  <!-- Lighting rays -->
+  <line x1="450" y1="110" x2="400" y2="330" stroke="#FFD700" stroke-width="1" stroke-dasharray="5,5"/>
+  <line x1="450" y1="110" x2="430" y2="440" stroke="#FFD700" stroke-width="1" stroke-dasharray="5,5"/>
+  <line x1="150" y1="100" x2="430" y2="330" stroke="#FFD700" stroke-width="1" stroke-dasharray="5,5"/>
+
+  <!-- USD Stage Structure -->
+  <rect x="700" y="100" width="150" height="150" class="rendering"/>
+  <text x="775" y="120" class="text" font-weight="bold">USD Stage</text>
+  <text x="775" y="140" class="text">Structure</text>
+
+  <!-- Prims in USD Stage -->
+  <rect x="720" y="160" width="110" height="20" fill="#E0E0E0" stroke="#9E9E9E" stroke-width="1"/>
+  <text x="775" y="170" class="text" font-size="10">/World</text>
+
+  <rect x="720" y="190" width="110" height="20" fill="#E0E0E0" stroke="#9E9E9E" stroke-width="1"/>
+  <text x="775" y="200" class="text" font-size="10">/World/Robot</text>
+
+  <rect x="720" y="220" width="110" height="20" fill="#E0E0E0" stroke="#9E9E9E" stroke-width="1"/>
+  <text x="775" y="230" class="text" font-size="10">/World/Environment</text>
+
+  <!-- Rendering Pipeline -->
+  <rect x="100" y="150" width="200" height="40" class="rendering"/>
+  <text x="200" y="170" class="text">RTX Rendering</text>
+
+  <!-- Synthetic Data Generation -->
+  <rect x="100" y="250" width="200" height="80" class="highlight"/>
+  <text x="200" y="270" class="text" font-weight="bold">Synthetic Data</text>
+  <text x="200" y="290" class="text">Generation</text>
+  <text x="200" y="310" class="text">(RGB, Depth, Seg)</text>
+
+  <!-- Data Output Types -->
+  <circle cx="140" cy="270" r="12" class="sensor"/>
+  <text x="140" y="270" class="text" font-size="10">RGB</text>
+
+  <circle cx="180" cy="270" r="12" class="sensor"/>
+  <text x="180" y="270" class="text" font-size="10">D</text>
+
+  <circle cx="220" cy="270" r="12" class="sensor"/>
+  <text x="220" y="270" class="text" font-size="10">Seg</text>
+
+  <circle cx="260" cy="270" r="12" class="sensor"/>
+  <text x="260" y="270" class="text" font-size="10">Ins</text>
+
+  <!-- Physics Simulation -->
+  <rect x="350" y="150" width="180" height="40" fill="#F44336" stroke="#D32F2F" stroke-width="2" rx="10" ry="10"/>
+  <text x="440" y="170" class="text" fill="white">PhysX Physics</text>
+
+  <!-- Physics Properties -->
+  <rect x="370" y="200" width="140" height="20" fill="#FFCDD2" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="440" y="210" class="text" font-size="10">Collision Detection</text>
+
+  <rect x="370" y="230" width="140" height="20" fill="#FFCDD2" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="440" y="240" class="text" font-size="10">Rigid Body Dynamics</text>
+
+  <rect x="370" y="260" width="140" height="20" fill="#FFCDD2" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="440" y="270" class="text" font-size="10">Joint Constraints</text>
+
+  <!-- Isaac Sim Scenarios -->
+  <text x="450" y="550" class="text" font-weight="bold">Isaac Sim Scenarios:</text>
+  <text x="450" y="570" class="text" font-style="italic">Indoor Navigation | Outdoor Exploration | Object Manipulation | Multi-Sensor Fusion</text>
+
+  <!-- Labels -->
+  <text x="450" y="60" class="label">Isaac Sim Environment with Humanoid Robot and Synthetic Data Generation</text>
+
+  <!-- Arrowhead definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <text x="700" y="520" class="label" font-weight="bold">Legend:</text>
+  <rect x="670" y="540" width="20" height="15" class="robot"/>
+  <text x="720" y="550" class="label">Robot</text>
+
+  <rect x="670" y="565" width="20" height="15" class="sensor"/>
+  <text x="720" y="575" class="label">Sensors</text>
+
+  <rect x="670" y="590" width="20" height="15" class="environment"/>
+  <text x="720" y="600" class="label">Environment</text>
+</svg>

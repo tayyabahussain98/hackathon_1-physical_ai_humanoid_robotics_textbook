@@ -1,0 +1,182 @@
+<svg width="1000" height="700" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .input { fill: #2196F3; stroke: #0D47A1; stroke-width: 2px; rx: 10; ry: 10; }
+    .processing { fill: #FF9800; stroke: #EF6C00; stroke-width: 2px; rx: 10; ry: 10; }
+    .decision { fill: #FF5722; stroke: #E64A19; stroke-width: 2px; rx: 15; ry: 15; }
+    .output { fill: #4CAF50; stroke: #388E3C; stroke-width: 2px; rx: 10; ry: 10; }
+    .memory { fill: #9C27B0; stroke: #7B1FA2; stroke-width: 2px; rx: 10; ry: 10; }
+    .connection { stroke: #666; stroke-width: 2px; marker-end: url(#arrowhead); }
+    .text { fill: black; font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; dominant-baseline: middle; }
+    .title { fill: black; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-anchor: middle; }
+    .label { fill: black; font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+    .highlight { fill: #E91E63; stroke: #C2185B; stroke-width: 2px; rx: 10; ry: 10; }
+  </style>
+
+  <!-- Title -->
+  <text x="500" y="30" class="title">Cognitive Planning Workflow for Humanoid Robotics</text>
+
+  <!-- Input Layer -->
+  <text x="500" y="60" class="label" font-weight="bold">Input Layer</text>
+
+  <!-- Sensor Inputs -->
+  <rect x="100" y="80" width="150" height="60" class="input"/>
+  <text x="175" y="100" class="text">Visual Input</text>
+  <text x="175" y="120" class="text">(Camera, LIDAR)</text>
+
+  <rect x="300" y="80" width="150" height="60" class="input"/>
+  <text x="375" y="100" class="text">Tactile Input</text>
+  <text x="375" y="120" class="text">(Force, Touch)</text>
+
+  <rect x="500" y="80" width="150" height="60" class="input"/>
+  <text x="575" y="100" class="text">Audio Input</text>
+  <text x="575" y="120" class="text">(Speech, Sound)</text>
+
+  <rect x="700" y="80" width="150" height="60" class="input"/>
+  <text x="775" y="100" class="text">Proprioceptive</text>
+  <text x="775" y="120" class="text">(Joint, IMU)</text>
+
+  <!-- Perception Processing -->
+  <text x="500" y="170" class="label" font-weight="bold">Perception Processing</text>
+
+  <rect x="100" y="190" width="150" height="60" class="processing"/>
+  <text x="175" y="210" class="text">Object</text>
+  <text x="175" y="230" class="text">Detection</text>
+
+  <rect x="300" y="190" width="150" height="60" class="processing"/>
+  <text x="375" y="210" class="text">Pose</text>
+  <text x="375" y="230" class="text">Estimation</text>
+
+  <rect x="500" y="190" width="150" height="60" class="processing"/>
+  <text x="575" y="210" class="text">Speech</text>
+  <text x="575" y="230" class="text">Recognition</text>
+
+  <rect x="700" y="190" width="150" height="60" class="processing"/>
+  <text x="775" y="210" class="text">State</text>
+  <text x="775" y="230" class="text">Estimation</text>
+
+  <!-- World Model & Memory -->
+  <text x="500" y="280" class="label" font-weight="bold">World Model & Memory</text>
+
+  <rect x="200" y="300" width="200" height="60" class="memory"/>
+  <text x="300" y="320" class="text">Semantic</text>
+  <text x="300" y="340" class="text">Map</text>
+
+  <rect x="500" y="300" width="200" height="60" class="memory"/>
+  <text x="600" y="320" class="text">Episodic</text>
+  <text x="600" y="340" class="text">Memory</text>
+
+  <!-- Cognitive Planning Core -->
+  <text x="500" y="390" class="label" font-weight="bold">Cognitive Planning Core</text>
+
+  <!-- Goal Reasoning -->
+  <rect x="150" y="410" width="180" height="60" class="highlight"/>
+  <text x="240" y="430" class="text" font-weight="bold">Goal</text>
+  <text x="240" y="450" class="text">Reasoning</text>
+
+  <!-- Task Planning -->
+  <rect x="410" y="410" width="180" height="60" class="highlight"/>
+  <text x="500" y="430" class="text" font-weight="bold">Task</text>
+  <text x="500" y="450" class="text">Planning</text>
+
+  <!-- Motion Planning -->
+  <rect x="670" y="410" width="180" height="60" class="highlight"/>
+  <text x="760" y="430" class="text" font-weight="bold">Motion</text>
+  <text x="760" y="450" class="text">Planning</text>
+
+  <!-- Decision Points -->
+  <text x="500" y="500" class="label" font-weight="bold">Decision Points</text>
+
+  <!-- High-Level Decision -->
+  <ellipse cx="300" cy="520" rx="60" ry="30" class="decision"/>
+  <text x="300" y="520" class="text">Goal</text>
+  <text x="300" y="540" class="text">Achieved?</text>
+
+  <!-- Task Decision -->
+  <ellipse cx="500" cy="520" rx="60" ry="30" class="decision"/>
+  <text x="500" y="520" class="text">Task</text>
+  <text x="500" y="540" class="text">Feasible?</text>
+
+  <!-- Motion Decision -->
+  <ellipse cx="700" cy="520" rx="60" ry="30" class="decision"/>
+  <text x="700" y="520" class="text">Path</text>
+  <text x="700" y="540" class="text">Clear?</text>
+
+  <!-- Execution Layer -->
+  <text x="500" y="580" class="label" font-weight="bold">Execution Layer</text>
+
+  <!-- Action Selection -->
+  <rect x="250" y="600" width="150" height="60" class="output"/>
+  <text x="325" y="620" class="text">Action</text>
+  <text x="325" y="640" class="text">Selection</text>
+
+  <!-- Control Execution -->
+  <rect x="450" y="600" width="150" height="60" class="output"/>
+  <text x="525" y="620" class="text">Control</text>
+  <text x="525" y="640" class="text">Execution</text>
+
+  <!-- Feedback -->
+  <rect x="650" y="600" width="150" height="60" class="output"/>
+  <text x="725" y="620" class="text">Feedback</text>
+  <text x="725" y="640" class="text">Processing</text>
+
+  <!-- Connections -->
+  <!-- Input to Perception -->
+  <line x1="175" y1="140" x2="175" y2="190" class="connection"/>
+  <line x1="375" y1="140" x2="375" y2="190" class="connection"/>
+  <line x1="575" y1="140" x2="575" y2="190" class="connection"/>
+  <line x1="775" y1="140" x2="775" y2="190" class="connection"/>
+
+  <!-- Perception to World Model -->
+  <line x1="175" y1="250" x2="300" y2="300" class="connection"/>
+  <line x1="375" y1="250" x2="300" y2="300" class="connection"/>
+  <line x1="575" y1="250" x2="600" y2="300" class="connection"/>
+  <line x1="775" y1="250" x2="600" y2="300" class="connection"/>
+
+  <!-- World Model to Planning -->
+  <line x1="300" y1="360" x2="240" y2="410" class="connection"/>
+  <line x1="600" y1="360" x2="500" y2="410" class="connection"/>
+
+  <!-- Planning to Decisions -->
+  <line x1="240" y1="470" x2="300" y2="490" class="connection"/>
+  <line x1="500" y1="470" x2="500" y2="490" class="connection"/>
+  <line x1="760" y1="470" x2="700" y2="490" class="connection"/>
+
+  <!-- Decisions to Execution -->
+  <line x1="300" y1="550" x2="325" y2="600" class="connection"/>
+  <line x1="500" y1="550" x2="525" y2="600" class="connection"/>
+  <line x1="700" y1="550" x2="725" y2="600" class="connection"/>
+
+  <!-- Feedback Loop -->
+  <line x1="725" y1="600" x2="775" y2="250" stroke="#FF5722" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+
+  <!-- Iterative Planning Loop -->
+  <path d="M 525 600 Q 800 500 760 470" stroke="#4CAF50" stroke-width="2" stroke-dasharray="5,5" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Labels -->
+  <text x="500" y="60" class="label">Cognitive Planning Process for Humanoid Robot Decision Making</text>
+
+  <!-- Arrowhead definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <text x="750" y="680" class="label" font-weight="bold">Legend:</text>
+  <rect x="720" y="690" width="15" height="10" class="input"/>
+  <text x="770" y="695" class="label">Input</text>
+
+  <rect x="720" y="705" width="15" height="10" class="processing"/>
+  <text x="770" y="710" class="label">Processing</text>
+
+  <ellipse cx="728" cy="720" rx="8" ry="5" class="decision"/>
+  <text x="770" y="725" class="label">Decision</text>
+
+  <rect x="720" y="730" width="15" height="10" class="output"/>
+  <text x="770" y="735" class="label">Output</text>
+
+  <rect x="720" y="745" width="15" height="10" class="memory"/>
+  <text x="770" y="750" class="label">Memory</text>
+</svg>
