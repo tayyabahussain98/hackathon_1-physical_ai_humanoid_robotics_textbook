@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock, patch, MagicMock
 import os
-from main import is_valid_url, normalize_url, sanitize_content, validate_embeddings, chunk_text, validate_configuration
-from main import get_all_urls, extract_text_from_url, embed, create_collection, save_chunk_to_qdrant
+from api import is_valid_url, normalize_url, sanitize_content, validate_embeddings, chunk_text, validate_configuration
+from api import get_all_urls, extract_text_from_url, embed, create_collection, save_chunk_to_qdrant
 
 
 class TestURLUtilities(unittest.TestCase):
